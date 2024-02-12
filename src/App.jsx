@@ -61,71 +61,105 @@ function App() {
           <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
             {/* Card */}
             <Card
-              img="comida.png"
-              description="Speacy seasoned seafood nodles"
+              img="queso-crema-colanta.png"
+              description="Queso Crema"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="dish.png"
-              description="Speacy seasoned seafood nodles"
+              img="huevos.jpg"
+              description="Detergente Versa"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="comida.png"
-              description="Speacy seasoned seafood nodles"
+              img="azucar.jpg"
+              description="Azucar"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="dish.png"
-              description="Speacy seasoned seafood nodles"
+              img="cerveza-aguila-6u.jpg"
+              description="Aguila Six-Pack"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="comida.png"
-              description="Speacy seasoned seafood nodles"
+              img="cafe-sello-rojo.jpg"
+              description="Cafe Sello Rojo"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="dish.png"
-              description="Speacy seasoned seafood nodles"
+              img="cocacola-x250.jpg"
+              description="Coca Cola 400ml"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="comida.png"
-              description="Speacy seasoned seafood nodles"
+              img="frutiño-limon.jpg"
+              description="Frutiño limón"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="dish.png"
-              description="Speacy seasoned seafood nodles"
+              img="gelatina-limon.jpg"
+              description="gelatina-limon"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="comida.png"
-              description="Speacy seasoned seafood nodles"
+              img="sal-marina.jpg"
+              description="Sal Marina"
               price="2.29"
               inventory="20"
             />
             {/* Card */}
             <Card
-              img="dish.png"
-              description="Speacy seasoned seafood nodles"
+              img="queso-costeño.jpg"
+              description="Queso Costeño"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="jamon-pietran.jpg"
+              description="Jamón Pietran"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="coca-cola-2L.jpg"
+              description="Cocacola 2 Lts"
+              price="2.29"
+              inventory="20"
+            />
+             <Card
+              img="queso-costeño.jpg"
+              description="Queso Costeño"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="jamon-pietran.jpg"
+              description="Jamón Pietran"
+              price="2.29"
+              inventory="20"
+            />
+            {/* Card */}
+            <Card
+              img="coca-cola-2L.jpg"
+              description="Cocacola 2 Lts"
               price="2.29"
               inventory="20"
             />
