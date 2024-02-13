@@ -1,9 +1,18 @@
-import React from "react";
 import { RiSearch2Line } from "react-icons/ri";
 
+const Header = (props) => {
+  const { selectedCategory, setSelectedCategory } = props
+  const categoryData = [ 
+    { id: 1, name: 'Bebidas', category: '1' },
+    { id: 2, name: 'Viveres', category: '2' },
+    { id: 3, name: 'Aseo Personal', category: '3' },
+    { id: 4, name: 'Aseo Hogar', category: '4' },
+  ];
 
-const Header = () => {
   const hoy = new Date().toLocaleDateString();
+  // const [selectedCategory, setSelectedCategory] = useState(categoryData[0].id);
+  // console.log('selectedCategory',selectedCategory)
+
   return (
     <header>
       {/* Title and search */}
@@ -25,21 +34,15 @@ const Header = () => {
       </div>
       {/* Tabs */}
       <nav className="text-gray-300 flex items-center justify-between md:justify-start md:gap-8 border-b mb-6">
-        <a
-          href="#"
-          className="relative py-2 pr-4 before:w-1/2 before:h-[2px] before:absolute before:bg-[#ec7c6a] before:left-0 before:rounded-full before:-bottom-[1px] text-[#ec7c6a]"
-        >
-          Bebidas
-        </a>
-        <a href="#" className="py-2 pr-4">
-          Viveres
-        </a>
-        <a href="#" className="py-2 pr-4">
-          Aseo
-        </a>
-        <a href="#" className="py-2">
-          Miscelanea
-        </a>
+        {categoryData.map(item => (
+          <button
+            key={item.id}
+            className={`py-2 pr-4 ${selectedCategory === item.category ? 'relative before:w-1/2 before:h-[2px] before:absolute before:bg-[#ec7c6a] before:left-0 before:rounded-full before:-bottom-[1px] text-[#ec7c6a]' : ''}`}
+            onClick={() => setSelectedCategory(item.category)}
+          >
+            {item.name}
+          </button>
+        ))}
       </nav>
     </header>
   );
