@@ -15,18 +15,17 @@ import Card from "./components/shared/Card";
 
 import useDataBase from './hooks/useDataBase';
 
-// src\hooks\useDataBase.jsx
-// src\App.jsx
-
 function App() {
-  // const [selectedCategory, setSelectedCategory] = useState(categoryData[0].id);
+  // Se inicializa en categoría 1 , que es Bebidas
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
+  // filteredList, filtra los productos por tipo y los coloca en diferentes tabs
   const [filteredList, setFilteredList] = useState([]);
   const [carList, setCarList] = useState([]);
   const { dataBase } = useDataBase(); 
 
+  // Filtra por categoria seleccionada en los tabs al iniciar la pagina
   useEffect(() => {
     const filteredData = dataBase.filter(item => item.category === selectedCategory);
     setFilteredList(filteredData);
@@ -42,19 +41,13 @@ function App() {
     setShowMenu(false);
   };
 
+  // Filtra por categoria seleccionada al dar click en algún tab
   useEffect(()=>{
     const filteredData = dataBase.filter(item => {
-      console.log('selectedCategory-item.category', selectedCategory, item.category);
       return item.category === selectedCategory;
     });
-    
     setFilteredList(filteredData);
-    console.log('filteredList con useEffect',filteredList)
   }, [selectedCategory])
-
-  useEffect(() => {
-    console.log('carList', carList)
-  }, [carList]);
 
   return (
     <div className="bg-[#262837] w-full min-h-screen">
@@ -99,6 +92,7 @@ function App() {
           {/* Content */}
           <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
 
+          {/* Muestra las cards por categorias filtradas */}
           {
             filteredList.map(item => (
               <Card

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import CarBasket from "./CarBasket";
 
-const Card = (props) => {
+const Car = (props) => {
   const { 
     showOrder, 
     setShowOrder, 
@@ -12,15 +12,34 @@ const Card = (props) => {
 
   const [totalCarrito, setTotalCarrito] = useState(0);
 
-  useEffect(() => {
+  const updateTotalCarrito = (cant, producto, index) => {
     let total = 0;
-    carList.forEach((item) => {
-      total += item.valorBasket;
-    });
-    setTotalCarrito(total);
-  }, [carList]);
+    const lista = carList.map((item, i) => {
+      if (i === index) {
 
-  console.log('De aquí saco los datos', carList)
+        const valorTotalItem = item.price * cant;
+        total += valorTotalItem;
+        return {
+          ...item,
+          cantidad: cant,
+          valorTotal: valorTotalItem
+        };
+      } else {
+        // total += (item.valorTotal || item.price) * (item.cantidad || 1);
+        total += (item.valorTotal);
+        return item;
+      
+      }
+
+    });
+
+    setCarList(lista); // Actualiza carList en el componente Card
+    setTotalCarrito(total);
+  };
+// DEBERIA SUMAR CADA VEZ QUE carList CAMBIA..INCLUSO EJECUTAR updateTotalCarrito
+  useEffect(() => {
+    updateTotalCarrito ()
+  }, [carList, updateTotalCarrito]);
 
   return (
     <div
@@ -55,20 +74,22 @@ const Card = (props) => {
             <h5>{carList?.price}</h5>
           </div>
           {/* Products */}
-          
           <div className="h-[400px] md:h-[700px] lg:h-[540px] overflow-scroll">
-            {
-              carList.map(item => (
-                <CarBasket 
-                  productName={item.description}
-                  price={item.price}
-                  image={item.img}
-                  setTotalCarrito={setTotalCarrito}
-                />
-              ))
-            }
-          </div>
+          {carList.map((item, index) => (
+            
+              <CarBasket 
+                key={index}
+                productName={item.description}
+                price={item.price}
+                image={item.img}
+                updateTotalCarrito={(cant) => updateTotalCarrito(cant, item, index)}
+                producto={item}
+                index={index} // Pasa el índice al componente CarBasket
+              />
+            
+          ))}
 
+          </div>
         </div>
         {/* Submit payment */}
         <div className="bg-[#262837] absolute w-full bottom-0 left-0 p-4">
@@ -91,4 +112,4 @@ const Card = (props) => {
   );
 };
 
-export default Card;
+export default Car;
