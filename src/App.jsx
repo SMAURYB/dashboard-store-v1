@@ -7,6 +7,7 @@ import {
   RiCloseLine,
   RiArrowDownSLine,
 } from "react-icons/ri";
+import { MdOutlineCancel } from "react-icons/md";
 import Sidebar from "./components/shared/Sidebar";
 import Car from "./components/shared/Car";
 import Header from "./components/shared/Header";
@@ -23,6 +24,7 @@ function App() {
   const [searchItem, setSearchItem] = useState('');
   const [matchingCount, setMatchingCount] = useState('');
   const [showProductImage, setShowProductImage] = useState(false);
+  const [selectedImage, setSelectedImage] = useState('');
 
   const { dataBase } = useDataBase();
 
@@ -50,27 +52,37 @@ function App() {
   }, [searchItem]);
 
   return (
-    <div className={`${showProductImage ? 'blur-lg' : ''} bg-[#262837] w-full min-h-screen`}>
-      {showProductImage && <h1>FOTO</h1>}
+    <>
+    
+    {showProductImage && 
+        <div className="z-40 flex items-center justify-center h-screen absolute w-full">
+          <div className="relative">
+            <button
+              onClick={() => setShowProductImage(false)}
+              className="w-6 h-6 absolute right-5 top-4"
+            >
+              <MdOutlineCancel className="w-8 h-8 fill-neutral-600"/>
+            </button>
+            <img 
+              src={selectedImage} 
+              alt="Selected Product"
+              className="w-[270px] h-[270px] object-cover shadow-2xl rounded-lg"
+            />
+          </div>
+        </div>
+      }
+    <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full min-h-screen'}`}>
+      
 
       <Sidebar showMenu={showMenu} />
-
       <Car 
         showOrder={showOrder} 
         setShowOrder={setShowOrder}
         carList={carList}
         setCarList={setCarList}
       />
-
-      <Car 
-        showOrder={showOrder} 
-        setShowOrder={setShowOrder}
-        carList={carList}
-        setCarList={setCarList}
-      />
-      
       {/* Menu movil */}
-      <nav className="bg-[#1F1D2B] blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
+      <nav className={`z-20 bg-[#1F1D2B] blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl`}>
         <button className="p-2">
           <RiUser3Line />
         </button>
@@ -84,7 +96,8 @@ function App() {
           {showMenu ? <RiCloseLine /> : <RiMenu3Fill />}
         </button>
       </nav>
-      <main className="lg:pl-32 lg:pr-96 pb-20 ">
+      <main className={`lg:pl-32 lg:pr-96 pb-20`}>
+      
         <div className="md:p-8 p-4">
           {/* Header */}
           <Header 
@@ -118,6 +131,7 @@ function App() {
                     carList={carList}
                     selected={item.selected}
                     setShowProductImage={setShowProductImage}
+                    setSelectedImage={setSelectedImage}
                   />
                 ))
               : filteredList.map((item) => (
@@ -131,6 +145,8 @@ function App() {
                     setCarList={setCarList}
                     carList={carList}
                     selected={item.selected}
+                    setShowProductImage={setShowProductImage}
+                    setSelectedImage={setSelectedImage}
                   />
                 ))
           }
@@ -138,6 +154,7 @@ function App() {
         </div>
       </main>
     </div>
+    </>
   );
 }
 

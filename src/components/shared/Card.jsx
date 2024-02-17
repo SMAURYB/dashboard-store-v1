@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Card = (props) => {
-  const { img, description, price, inventory, setCarList, carList, selected, setShowProductImage } = props;
+  const { img, description, price, inventory, setCarList, carList, selected, setShowProductImage, setSelectedImage } = props;
   const [isChecked, setIsChecked] = useState(selected || false);
 
   const handleCheckboxChange = () => {
@@ -19,7 +19,8 @@ const Card = (props) => {
   };
 
   const handleShowProductImage = () => {
-    setShowProductImage(true)
+    setShowProductImage(true);
+    setSelectedImage(img);
   }
 
   return (
