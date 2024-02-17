@@ -7,30 +7,30 @@ import {
   RiCloseLine,
   RiArrowDownSLine,
 } from "react-icons/ri";
-// Components
 import Sidebar from "./components/shared/Sidebar";
 import Car from "./components/shared/Car";
 import Header from "./components/shared/Header";
 import Card from "./components/shared/Card";
-
 import useDataBase from './hooks/useDataBase';
 
 function App() {
-  // Se inicializa en categoría 1 , que es Bebidas
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
-  // filteredList, filtra los productos por tipo y los coloca en diferentes tabs
   const [filteredList, setFilteredList] = useState([]);
+  const [searchList, setSearchList] = useState([]);
   const [carList, setCarList] = useState([]);
-  const { dataBase } = useDataBase(); 
+  const [searchItem, setSearchItem] = useState('');
+  const [matchingCount, setMatchingCount] = useState('');
+  const [showProductImage, setShowProductImage] = useState(false);
 
-  // Filtra por categoria seleccionada en los tabs al iniciar la pagina
+  const { dataBase } = useDataBase();
+
   useEffect(() => {
     const filteredData = dataBase.filter(item => item.category === selectedCategory);
     setFilteredList(filteredData);
-  }, []);
-  
+  }, [selectedCategory]);
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
     setShowOrder(false);
@@ -41,27 +41,36 @@ function App() {
     setShowMenu(false);
   };
 
-  // Filtra por categoria seleccionada al dar click en algún tab
-  useEffect(()=>{
-    const filteredData = dataBase.filter(item => {
-      return item.category === selectedCategory;
-    });
-    setFilteredList(filteredData);
-  }, [selectedCategory])
+  useEffect(() => {
+    const searchData = dataBase.filter(item =>
+      item.name.toLowerCase().includes(searchItem.toLowerCase())
+    );
+    setSearchList(searchData);
+    setMatchingCount(searchList.length);
+  }, [searchItem]);
 
   return (
-    <div className="bg-[#262837] w-full min-h-screen">
+    <div className={`${showProductImage ? 'blur-lg' : ''} bg-[#262837] w-full min-h-screen`}>
+      {showProductImage && <h1>FOTO</h1>}
+
       <Sidebar showMenu={showMenu} />
 
       <Car 
         showOrder={showOrder} 
         setShowOrder={setShowOrder}
         carList={carList}
-        setCarList={setCarList} 
+        setCarList={setCarList}
+      />
+
+      <Car 
+        showOrder={showOrder} 
+        setShowOrder={setShowOrder}
+        carList={carList}
+        setCarList={setCarList}
       />
       
       {/* Menu movil */}
-      <nav className="bg-[#1F1D2B] lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
+      <nav className="bg-[#1F1D2B] blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl">
         <button className="p-2">
           <RiUser3Line />
         </button>
@@ -81,6 +90,8 @@ function App() {
           <Header 
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            setSearchItem={setSearchItem}
+            matchingCount={matchingCount}
           />
           {/* Title content */}
           <div className="flex items-center justify-between mb-16">
@@ -90,22 +101,38 @@ function App() {
             </button>
           </div>
           {/* Content */}
-          <div className="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
+          <div className="p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16">
 
           {/* Muestra las cards por categorias filtradas */}
           {
-            filteredList.map(item => (
-              <Card
-                key={item.id}
-                img={item.imagen}
-                description={item.name}
-                price={item.price}
-                inventory={item.availability}
-                size={item.size}
-                setCarList={setCarList}
-                carList={carList}
-              />
-            ))
+            searchItem
+              ? searchList.map((item) => (
+                  <Card
+                    key={item.id}
+                    img={item.imagen}
+                    description={item.name}
+                    price={item.price}
+                    inventory={item.availability}
+                    size={item.size}
+                    setCarList={setCarList}
+                    carList={carList}
+                    selected={item.selected}
+                    setShowProductImage={setShowProductImage}
+                  />
+                ))
+              : filteredList.map((item) => (
+                  <Card
+                    key={item.id}
+                    img={item.imagen}
+                    description={item.name}
+                    price={item.price}
+                    inventory={item.availability}
+                    size={item.size}
+                    setCarList={setCarList}
+                    carList={carList}
+                    selected={item.selected}
+                  />
+                ))
           }
           </div>
         </div>

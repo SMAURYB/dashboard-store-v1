@@ -2,13 +2,25 @@ import React, { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const CarBasket = (props) => {
-  const { productName, price, image } = props;
+  const { productName, price, image, deleteItem } = props;
   const [cantidad, setCantidad] = useState(1);
 
   const handleCantidadChange = (newCantidad) => {
-    setCantidad(newCantidad);
-    props.updateTotalCarrito(newCantidad, props.producto, props.index);
+    if (newCantidad >= 1){
+      setCantidad(newCantidad);
+      props.updateTotalCarrito(newCantidad, props.producto, props.index);
+    } else {
+      setCantidad(0);
+    }
   };
+
+  const handleDeleteFromCarList = () => {
+    console.log('handleDeleteFromCarList')
+    // Llama a la función deleteItem del prop para eliminar el elemento del carList
+    deleteItem();
+  };
+
+  // console.log('carList-checkeo', carList)
 
   return (
     <div className="bg-[#262837] p-4 rounded-xl mb-4">
@@ -28,20 +40,22 @@ const CarBasket = (props) => {
             <span>$ {props.producto.valorTotal}</span>
           </div>
           <div className='h-5 flex flex-row justify-center items-center gap-x-2 font-semibold'>
-            <button
-              onClick={() => handleCantidadChange(cantidad - 1)}
-              className="text-gray-400"
-            >
-              -
-            </button>
-            <span>{cantidad}</span>
+          <button
+            onClick={() => (cantidad > 1) ? handleCantidadChange(cantidad - 1) : null}
+            className="text-gray-400 font-bold text-2xl w-6 h-6 bg-[#505050]/[15%] rounded-full flex items-center justify-center pb-2 transition duration-300 ease-in-out hover:bg-[#505050]/90 hover:border-[#545554]"
+          >
+            -
+          </button>
+
+            <span className='w-8 flex flex-row justify-center'>{cantidad}</span>
             <button
               onClick={() => handleCantidadChange(cantidad + 1)}
-              className="text-gray-400"
+              className="text-gray-400 font-bold text-2xl w-6 h-6 bg-[#505050]/[15%] rounded-full flex items-center justify-center pb-2 transition duration-300 ease-in-out hover:bg-[#505050]/90 hover:border-[#545554]"
             >
               +
             </button>
           </div>
+
         </div>
       </div>
       {/* Note */}
@@ -54,7 +68,10 @@ const CarBasket = (props) => {
           />
         </form>
         <div>
-          <button className="p-2 rounded-lg">
+          <button 
+          onClick={handleDeleteFromCarList}
+          className="p-2 rounded-lg border border-[#2e2]"
+          >
             <RiDeleteBin6Line className="text-red-500" />
           </button>
         </div>

@@ -16,7 +16,6 @@ const Car = (props) => {
     let total = 0;
     const lista = carList.map((item, i) => {
       if (i === index) {
-
         const valorTotalItem = item.price * cant;
         total += valorTotalItem;
         return {
@@ -25,21 +24,49 @@ const Car = (props) => {
           valorTotal: valorTotalItem
         };
       } else {
-        // total += (item.valorTotal || item.price) * (item.cantidad || 1);
         total += (item.valorTotal);
         return item;
-      
       }
-
     });
 
-    setCarList(lista); // Actualiza carList en el componente Card
+    setCarList(lista);
     setTotalCarrito(total);
   };
-// DEBERIA SUMAR CADA VEZ QUE carList CAMBIA..INCLUSO EJECUTAR updateTotalCarrito
+
+  // Recorre el arreglo y suma los valores
   useEffect(() => {
-    updateTotalCarrito ()
-  }, [carList, updateTotalCarrito]);
+    const productos = carList;
+    let sumaValorTotal = 0;
+  
+    productos.forEach(producto => {
+      sumaValorTotal += producto.valorTotal;
+    });
+  
+    setTotalCarrito(sumaValorTotal);
+  }, [carList]);
+  
+
+
+  // Efecto para actualizar el total cada vez que renderice
+  useEffect(() => {
+    updateTotalCarrito();
+  }, []);
+
+  // FUNCION PARA ELIMINAR UN ITEM DE carList CUANDO SE DA CLICK EN EL ICONO 'BASURERO'
+  const deleteItem = (index) => {
+    const updatedCarList = carList.filter((_, i) => i !== index);
+    setCarList(updatedCarList);
+  
+    // Actualiza la propiedad 'selected' en filteredList
+    // const updatedFilteredList = filteredList.map((item, i) => {
+    //   return {
+    //     ...item,
+    //     selected: i !== index ? item.selected : false,
+    //   };
+    // });
+  
+    // setFilteredList(updatedFilteredList);
+  };
 
   return (
     <div
@@ -76,19 +103,18 @@ const Car = (props) => {
           {/* Products */}
           <div className="h-[400px] md:h-[700px] lg:h-[540px] overflow-scroll">
           {carList.map((item, index) => (
-            
-              <CarBasket 
-                key={index}
-                productName={item.description}
-                price={item.price}
-                image={item.img}
-                updateTotalCarrito={(cant) => updateTotalCarrito(cant, item, index)}
-                producto={item}
-                index={index} // Pasa el índice al componente CarBasket
-              />
-            
+            <CarBasket 
+              key={index}
+              productName={item.description}
+              price={item.price}
+              image={item.img}
+              updateTotalCarrito={(cant) => updateTotalCarrito(cant, item, index)}
+              producto={item}
+              index={index} // Pasa el índice al componente CarBasket
+              setCarList={setCarList}
+              deleteItem={() => deleteItem(index)}  // Agrega esta línea
+            />
           ))}
-
           </div>
         </div>
         {/* Submit payment */}

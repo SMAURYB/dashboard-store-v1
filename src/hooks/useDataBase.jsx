@@ -13,7 +13,7 @@ function useDataBase() {
         { id: 10, name: 'Jamón Pietran', size: '1/2 libra', imagen: 'jamon-pietran.jpg', price: 14500, availability: 26, category: '2' },
         { id: 11, name: 'Jabón Rey', size: '300 gramos', imagen: 'jabon-rey-un-x300-gr.jpg', price: 4000, availability: 24, category: '4' },
         { id: 12, name: 'Fabuloso', size: '200 ml', imagen: 'fabuloso.jpg', price: 3600, availability: 12, category: '4' },
-        { id: 13, name: 'Coca Cola', size: '2 litros', imagen: 'coca-cola-2L.jpg', price: 3600, availability: 12, category: '1' },
+        { id: 13, name: 'Coca Cola Six-Pack', size: '2 litros', imagen: 'coca-cola-2L.jpg', price: 3600, availability: 12, category: '1' },
         { id: 14, name: 'Toalla Nosotras', size: '2 litros', imagen: 'toalla-nosotras.jpg', price: 3600, availability: 12, category: '3' },
         { id: 15, name: 'Jabón Dorado', size: 'unidad', imagen: 'jabon-bano-dorado-avena-y-miel-x125gr.jpg', price: 3600, availability: 12, category: '3' },
         { id: 16, name: 'Limpido', size: '1 litros', imagen: 'limpido.jpg', price: 3600, availability: 12, category: '4' },
