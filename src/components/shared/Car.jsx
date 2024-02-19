@@ -7,10 +7,13 @@ const Car = (props) => {
     showOrder, 
     setShowOrder, 
     carList, 
-    setCarList
+    setCarList,
+    filteredList,
+    searchList,
   } = props;
 
   const [totalCarrito, setTotalCarrito] = useState(0);
+  // const [isSelected, SetIsSelected] = useState(true)
 
   const updateTotalCarrito = (cant, producto, index) => {
     let total = 0;
@@ -44,29 +47,38 @@ const Car = (props) => {
   
     setTotalCarrito(sumaValorTotal);
   }, [carList]);
-  
+
+  // FUNCION PARA ELIMINAR UN ITEM DE carList CUANDO SE DA CLICK EN EL ICONO 'BASURERO'
+  const deleteItem = (id) => {
+      const auxCarlist = [...carList]
+      const elemetToDeleteIndex = auxCarlist.findIndex((e) => e.id === id)
+      if (elemetToDeleteIndex > -1) {
+        auxCarlist.splice(elemetToDeleteIndex, 1)
+      }
+      setCarList(auxCarlist)
+      let elementToModify = searchList.find((e) => e.id === id)
+      if (elementToModify) {
+        elementToModify.checked = false
+      }
+
+      let elementToModify2 = filteredList.find((e) => e.id === id)
+      if (elementToModify2) {
+        elementToModify2.checked = false
+      }
+
+    // const updatedCarList = carList.filter((_, i) => i.id !== id);
+    // setCarList(updatedCarList);
+    // // Desmarcar el elemento correspondiente en filteredList
+    // setFilteredList(updatedFilteredList);
+    // // unSelectCheckbox(index);
+  };
+
 
 
   // Efecto para actualizar el total cada vez que renderice
   useEffect(() => {
     updateTotalCarrito();
   }, []);
-
-  // FUNCION PARA ELIMINAR UN ITEM DE carList CUANDO SE DA CLICK EN EL ICONO 'BASURERO'
-  const deleteItem = (index) => {
-    const updatedCarList = carList.filter((_, i) => i !== index);
-    setCarList(updatedCarList);
-  
-    // Actualiza la propiedad 'selected' en filteredList
-    // const updatedFilteredList = filteredList.map((item, i) => {
-    //   return {
-    //     ...item,
-    //     selected: i !== index ? item.selected : false,
-    //   };
-    // });
-  
-    // setFilteredList(updatedFilteredList);
-  };
 
   return (
     <div
@@ -101,18 +113,21 @@ const Car = (props) => {
             <h5>{carList?.price}</h5>
           </div>
           {/* Products */}
-          <div className="h-[400px] md:h-[700px] lg:h-[540px] overflow-scroll">
+          <div className="h-[420px] md:h-[700px] lg:h-[540px] overflow-scroll ">
           {carList.map((item, index) => (
             <CarBasket 
-              key={index}
+              // key={item.id}
+              id={item.id}
               productName={item.description}
               price={item.price}
               image={item.img}
+              inventory={item.inventory}
               updateTotalCarrito={(cant) => updateTotalCarrito(cant, item, index)}
               producto={item}
               index={index} // Pasa el índice al componente CarBasket
               setCarList={setCarList}
-              deleteItem={() => deleteItem(index)}  // Agrega esta línea
+              deleteItem={() => deleteItem(item.id)}  // Agrega esta línea
+              // deleteItemFromCar={() => deleteItemFromCar(index)}
             />
           ))}
           </div>

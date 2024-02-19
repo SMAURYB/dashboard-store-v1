@@ -17,7 +17,6 @@ const Header = (props) => {
     const inputValue = e.target.value;
     setSearchItem(inputValue);
     setSearchText(inputValue); // Actualiza el estado del texto de búsqueda
-    console.log(inputValue);
     // Puedes realizar más acciones con el valor del input si es necesario
   };
 
@@ -50,7 +49,7 @@ const Header = (props) => {
             </p>
           </nav>
         :
-          <nav className='text-gray-300 flex items-center justify-between md:justify-start md:gap-8 border-b mb-6'>
+          <nav className='text-gray-300 text-lg flex items-center justify-between md:justify-start md:gap-8 border-b mb-6'>
             {categoryData.map(item => (
               <button
                 key={item.id}

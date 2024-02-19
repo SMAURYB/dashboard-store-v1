@@ -1,161 +1,35 @@
-import { useState, useEffect } from "react";
-import {
-  RiMenu3Fill,
-  RiUser3Line,
-  RiAddLine,
-  RiPieChartLine,
-  RiCloseLine,
-  RiArrowDownSLine,
-} from "react-icons/ri";
-import { MdOutlineCancel } from "react-icons/md";
-import Sidebar from "./components/shared/Sidebar";
-import Car from "./components/shared/Car";
-import Header from "./components/shared/Header";
-import Card from "./components/shared/Card";
-import useDataBase from './hooks/useDataBase';
-
+import Ecommerce from './Ecommerce'
+import FormFirebase from './FormFirebase'
+import { AuthProvider } from './context/AuthContext';
+// https://www.youtube.com/watch?v=4mGB9W0NOqU
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState('1');
-  const [showMenu, setShowMenu] = useState(false);
-  const [showOrder, setShowOrder] = useState(false);
-  const [filteredList, setFilteredList] = useState([]);
-  const [searchList, setSearchList] = useState([]);
-  const [carList, setCarList] = useState([]);
-  const [searchItem, setSearchItem] = useState('');
-  const [matchingCount, setMatchingCount] = useState('');
-  const [showProductImage, setShowProductImage] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  return ( 
+    <AuthProvider>
+      <FormFirebase />
+      <Ecommerce />
 
-  const { dataBase } = useDataBase();
-
-  useEffect(() => {
-    const filteredData = dataBase.filter(item => item.category === selectedCategory);
-    setFilteredList(filteredData);
-  }, [selectedCategory]);
-
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-    setShowOrder(false);
-  };
-
-  const toggleOrders = () => {
-    setShowOrder(!showOrder);
-    setShowMenu(false);
-  };
-
-  useEffect(() => {
-    const searchData = dataBase.filter(item =>
-      item.name.toLowerCase().includes(searchItem.toLowerCase())
-    );
-    setSearchList(searchData);
-    setMatchingCount(searchList.length);
-  }, [searchItem]);
-
-  return (
-    <>
-    
-    {showProductImage && 
-        <div className="z-40 flex items-center justify-center h-screen absolute w-full">
-          <div className="relative">
-            <button
-              onClick={() => setShowProductImage(false)}
-              className="w-6 h-6 absolute right-5 top-4"
-            >
-              <MdOutlineCancel className="w-8 h-8 fill-neutral-600"/>
-            </button>
-            <img 
-              src={selectedImage} 
-              alt="Selected Product"
-              className="w-[270px] h-[270px] object-cover shadow-2xl rounded-lg"
-            />
-          </div>
-        </div>
-      }
-    <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full min-h-screen'}`}>
-      
-
-      <Sidebar showMenu={showMenu} />
-      <Car 
-        showOrder={showOrder} 
-        setShowOrder={setShowOrder}
-        carList={carList}
-        setCarList={setCarList}
-      />
-      {/* Menu movil */}
-      <nav className={`z-20 bg-[#1F1D2B] blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl`}>
-        <button className="p-2">
-          <RiUser3Line />
-        </button>
-        <button className="p-2">
-          <RiAddLine />
-        </button>
-        <button onClick={toggleOrders} className="p-2">
-          <RiPieChartLine />
-        </button>
-        <button onClick={toggleMenu} className="text-white p-2">
-          {showMenu ? <RiCloseLine /> : <RiMenu3Fill />}
-        </button>
-      </nav>
-      <main className={`lg:pl-32 lg:pr-96 pb-20`}>
-      
-        <div className="md:p-8 p-4">
-          {/* Header */}
-          <Header 
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            setSearchItem={setSearchItem}
-            matchingCount={matchingCount}
-          />
-          {/* Title content */}
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="text-xl text-gray-300">Escoge tus productos</h2>
-            <button className="flex items-center gap-4 text-gray-300 bg-[#1F1D2B] py-2 px-4 rounded-lg">
-              <RiArrowDownSLine /> Dine in
-            </button>
-          </div>
-          {/* Content */}
-          <div className="p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16">
-
-          {/* Muestra las cards por categorias filtradas */}
-          {
-            searchItem
-              ? searchList.map((item) => (
-                  <Card
-                    key={item.id}
-                    img={item.imagen}
-                    description={item.name}
-                    price={item.price}
-                    inventory={item.availability}
-                    size={item.size}
-                    setCarList={setCarList}
-                    carList={carList}
-                    selected={item.selected}
-                    setShowProductImage={setShowProductImage}
-                    setSelectedImage={setSelectedImage}
-                  />
-                ))
-              : filteredList.map((item) => (
-                  <Card
-                    key={item.id}
-                    img={item.imagen}
-                    description={item.name}
-                    price={item.price}
-                    inventory={item.availability}
-                    size={item.size}
-                    setCarList={setCarList}
-                    carList={carList}
-                    selected={item.selected}
-                    setShowProductImage={setShowProductImage}
-                    setSelectedImage={setSelectedImage}
-                  />
-                ))
-          }
-          </div>
-        </div>
-      </main>
-    </div>
-    </>
+    </AuthProvider>
   );
 }
 
 export default App;
+
+// 0- Hacerle un hover a los productos - OK
+// 1- Al incrementar las cantidades no deben superar la cantidad en inventario OK
+// 2- Arreglar los focus de los checkbox - OK
+// 3- Arregla los checkbox que se borren cuando se elimina un item OK
+
+// 4- Crear módulo Login y autenticacion
+// 5- Crear módulo de carga de productos 
+// 6- Crear módulo de pagos
+// 7- Definir tipos de usuarios
+      // Vendedor
+      //   - Sube y baja productos , actualiza inventarios
+      //   - Debe tener un módulo que muestre histórico
+      // Comprador
+      //   - Compra
+      //   - mostrar favoritos
+// 8- Opción de cambiar colores de bg y menús
+// 9- Unificar las variables searc y filter
+
+
