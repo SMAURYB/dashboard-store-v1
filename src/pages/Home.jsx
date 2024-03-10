@@ -8,13 +8,14 @@ import {
   RiArrowDownSLine,
 } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
-import Sidebar from "./components/shared/Sidebar";
-import Car from "./components/shared/Car";
-import Header from "./components/shared/Header";
-import Card from "./components/shared/Card";
-import useDataBase from './hooks/useDataBase';
+import Sidebar from "../components/shared/Sidebar";
+import Car from "../components/shared/Car";
+import Header from "../components/shared/Header";
+import Card from "../components/shared/Card";
+import useDataBase from '../hooks/useDataBase';
 
-function Ecommerce() {
+export default function Home() {
+
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
@@ -53,7 +54,6 @@ function Ecommerce() {
 
   return (
     <>
-    
     {showProductImage && 
         <div className="z-40 flex items-center justify-center h-screen absolute w-full">
           <div className="relative">
@@ -72,8 +72,6 @@ function Ecommerce() {
         </div>
       }
     <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full min-h-screen'}`}>
-      
-
       <Sidebar showMenu={showMenu} />
       <Car 
         showOrder={showOrder} 
@@ -166,4 +164,3 @@ function Ecommerce() {
   );
 }
 
-export default Ecommerce;
