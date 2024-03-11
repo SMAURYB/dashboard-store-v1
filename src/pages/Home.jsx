@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useAuth } from '../assets/context/authContext';
+
 import {
   RiMenu3Fill,
   RiUser3Line,
@@ -15,6 +17,8 @@ import Card from "../components/shared/Card";
 import useDataBase from '../hooks/useDataBase';
 
 export default function Home() {
+
+  const authContext = useAuth()
 
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
@@ -51,6 +55,8 @@ export default function Home() {
     setSearchList(searchData);
     setMatchingCount(searchList.length);
   }, [searchItem]);
+
+  console.log('authContext', authContext)
 
   return (
     <>
