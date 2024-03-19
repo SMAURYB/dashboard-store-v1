@@ -1,5 +1,6 @@
 import { RiSearch2Line } from "react-icons/ri";
 import { useState } from "react";
+import { useAuth } from '../../context/AuthContext';
 
 const Header = (props) => {
   const { selectedCategory, setSelectedCategory, setSearchItem, matchingCount } = props;
@@ -12,7 +13,7 @@ const Header = (props) => {
   ];
 
   const hoy = new Date().toLocaleDateString();
-
+  const authContext = useAuth()
   const handleSearch = (e) => {
     const inputValue = e.target.value;
     setSearchItem(inputValue);
@@ -20,26 +21,33 @@ const Header = (props) => {
     // Puedes realizar más acciones con el valor del input si es necesario
   };
 
+  const userName = authContext?.user?.email;
+
   return (
     <header>
       {/* Title and search */}
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-6 ">
         <div>
           <h1 className="text-2xl text-gray-300">Tienda Virtual</h1>
           <p className="text-gray-500">Fecha: {hoy}</p>
         </div>
-        <form>
-          <div className="w-full relative">
-            <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
-            <input
-              onChange={handleSearch}
-              value={searchText}
-              type="text"
-              className="bg-[#1F1D2B] w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
-              placeholder="Buscar"
-            />
+        <div className="flex flex-col items-start justify-center">
+          <form >
+            <div className="w-full relative flex flex-row items-center justify-between">
+              <RiSearch2Line className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-300" />
+              <input
+                onChange={handleSearch}
+                value={searchText}
+                type="text"
+                className="bg-[#1F1D2B] w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
+                placeholder="Buscar"
+              />
+            </div>
+          </form>
+          <div>
+            <p>{userName}</p>
           </div>
-        </form>
+        </div>
       </div>
       {/* Tabs */}
         {searchText ?

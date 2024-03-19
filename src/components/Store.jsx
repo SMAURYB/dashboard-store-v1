@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useAuth } from '../assets/context/authContext';
+import { useAuth } from '../context/AuthContext';
 
 import {
   RiMenu3Fill,
@@ -10,16 +10,16 @@ import {
   RiArrowDownSLine,
 } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
-import Sidebar from "../components/shared/Sidebar";
-import Car from "../components/shared/Car";
-import Header from "../components/shared/Header";
-import Card from "../components/shared/Card";
+import Sidebar from "./shared/Sidebar";
+import Car from "./shared/Car";
+import Header from "./shared/Header";
+import Card from "./shared/Card";
 import useDataBase from '../hooks/useDataBase';
 
-export default function Home() {
+export default function Store() {
 
   const authContext = useAuth()
-
+  
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
@@ -32,6 +32,7 @@ export default function Home() {
   const [selectedImage, setSelectedImage] = useState('');
 
   const { dataBase } = useDataBase();
+  const userName = authContext?.user?.email;
 
   useEffect(() => {
     const filteredData = dataBase.filter(item => item.category === selectedCategory);
@@ -56,12 +57,11 @@ export default function Home() {
     setMatchingCount(searchList.length);
   }, [searchItem]);
 
-  console.log('authContext', authContext)
-
+  // console.log('authContext.user.auth._isInitialized', authContext.user && authContext.user.auth && authContext.user.auth._isInitialized);
   return (
     <>
     {showProductImage && 
-        <div className="z-40 flex items-center justify-center h-screen absolute w-full">
+        <div className="z-40 flex items-center justify-center absolute w-full">
           <div className="relative">
             <button
               onClick={() => setShowProductImage(false)}
@@ -77,7 +77,7 @@ export default function Home() {
           </div>
         </div>
       }
-    <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full min-h-screen'}`}>
+    <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full h-screen'}`}>
       <Sidebar showMenu={showMenu} />
       <Car 
         showOrder={showOrder} 
@@ -102,25 +102,28 @@ export default function Home() {
           {showMenu ? <RiCloseLine /> : <RiMenu3Fill />}
         </button>
       </nav>
-      <main className={`lg:pl-32 lg:pr-96 pb-20`}>
+      <main className={`lg:pl-32 lg:pr-96 pb-20 flex flex-col items-center justify-start`}>
       
-        <div className="md:p-8 p-4">
+        <div className="md:p-4 px-2 ">
           {/* Header */}
-          <Header 
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            setSearchItem={setSearchItem}
-            matchingCount={matchingCount}
-          />
-          {/* Title content */}
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="text-xl text-gray-300">Escoge tus productos</h2>
-            <button className="flex items-center gap-4 text-gray-300 bg-[#1F1D2B] py-2 px-4 rounded-lg">
-              <RiArrowDownSLine /> Dine in
-            </button>
+          <div  className="h-auto">
+            <Header 
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              setSearchItem={setSearchItem}
+              matchingCount={matchingCount}
+            />
+            {/* Title content */}
+            <div className="flex items-center justify-between mb-1 overflow-y-hidden">
+              <h2 className="text-xl text-gray-300">Escoge tus productos</h2>
+              <button className="flex items-center gap-4 text-gray-300 bg-[#1F1D2B] py-2 px-4 rounded-lg">
+                <RiArrowDownSLine /> Dine in
+              </button>
+            </div>
           </div>
+          
           {/* Content */}
-          <div className="p-8 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-16 gap-y-[56px]">
+          <div className="h-full pb-8 px-8 pt-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-16 gap-y-[66px]">
 
           {/* Muestra las cards por categorias filtradas */}
           {

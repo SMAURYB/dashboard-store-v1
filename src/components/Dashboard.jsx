@@ -1,15 +1,22 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 import mercado from '../assets/mercado.png';
 
 export default function Dashboard() {
+  const authContext = useAuth()
   const navigate = useNavigate()
   const handleButtonClick = (item) => {
-    navigate(`/login`)
+    navigate(`/`)
   }
+  
+  // Obtén el nombre de usuario del contexto de autenticación
+  const userName = authContext?.user?.email;
 
   return (
     <div className='flex flex-col items-center justify-center pt-5 pb-2 gap-y-3'>
+      <h1>Bienvenido usuario {userName}</h1>
         <p className='text-[24px] text-[#c8d2ee]'>Mi tienda online</p>
         <img src={mercado} className='w-[500px] opacity-80'/>
         <button 
@@ -21,4 +28,3 @@ export default function Dashboard() {
     </div>
   );
 }
-

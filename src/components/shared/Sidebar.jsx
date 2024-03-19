@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
 import {
   RiHome6Line,
-  RiPercentLine,
+  RiUserLine,
   RiPieChartLine,
   RiMailLine,
   RiNotification3Line,
@@ -11,6 +12,7 @@ import {
 
 const Sidebar = (props) => {
   const { showMenu } = props;
+  const navigate = useNavigate();
 
   return (
     <div
@@ -24,20 +26,16 @@ const Sidebar = (props) => {
             <img src="car-red.png" alt="Logo carro compras" className="w-[50px] h-[50px] opacity-90" />
           </li>
           <li className="bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl">
-            <a
-              href="#"
-              className="bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-white"
-            >
+            {/* Utiliza navigate('/profile') para navegar a la ruta '/profile' */}
               <RiHome6Line className="text-2xl" />
-            </a>
           </li>
           <li className="hover:bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
-            <a
-              href="#"
+            <button
+              onClick={() => navigate("/profile")}
               className="group-hover:bg-[#ec7c6a] p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors"
             >
-              <RiPercentLine className="text-2xl" />
-            </a>
+              <RiUserLine className="text-2xl" />
+            </button>
           </li>
           <li className="hover:bg-[#262837] p-4 rounded-tl-xl rounded-bl-xl group transition-colors">
             <a
