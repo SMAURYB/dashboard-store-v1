@@ -10,11 +10,12 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./components/Profile";
 import Payment from "./components/Payment";
 import AuthProvider, { useAuth } from "./context/AuthContext";
+import useThemes from './hooks/useThemes';
 
 function App() {
   const { user, loading } = useAuth();
   const [redirectToLogin, setRedirectToLogin] = useState(false);
-
+  const { bg1 } = useThemes();
   // Espera a que se cargue la información de autenticación antes de renderizar las rutas
   if (loading) {
     return <div>Cargando...</div>;
@@ -26,7 +27,7 @@ function App() {
   }
 
   return (
-    <div className="bg-slate-800 h-screen flex items-center justify-center text-[white]">
+    <div className={`${bg1} h-screen flex items-center justify-center text-[white]`}>
       <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />

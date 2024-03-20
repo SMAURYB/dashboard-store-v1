@@ -15,6 +15,7 @@ import Car from "./shared/Car";
 import Header from "./shared/Header";
 import Card from "./shared/Card";
 import useDataBase from '../hooks/useDataBase';
+import useThemes from '../hooks/useThemes';
 
 export default function Store() {
 
@@ -32,6 +33,7 @@ export default function Store() {
   const [selectedImage, setSelectedImage] = useState('');
 
   const { dataBase } = useDataBase();
+  const { bg1, bg2, bg3, bg4, setBg1, setBg2, setBg3, setBg4 } = useThemes();
   const userName = authContext?.user?.email;
 
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function Store() {
     setMatchingCount(searchList.length);
   }, [searchItem]);
 
-  
+  console.log('bg1,bg2,bg3,bg4',bg1,bg2,bg3,bg4)
 
   // console.log('authContext.user.auth._isInitialized', authContext.user && authContext.user.auth && authContext.user.auth._isInitialized);
   return (
@@ -79,8 +81,18 @@ export default function Store() {
           </div>
         </div>
       }
-    <div className={`${showProductImage ? 'blur-lg opacity-5' : 'relative z-20 bg-[#262837] w-full h-screen'}`}>
-      <Sidebar showMenu={showMenu} />
+    <div className={`${showProductImage ? 'blur-lg opacity-5' : `relative z-20 ${bg1} w-full h-screen`}`}>
+      <Sidebar 
+        showMenu={showMenu} 
+        bg1={bg1}
+        bg2={bg2}
+        bg3={bg3}
+        bg4={bg4}
+        setBg1={setBg1}
+        setBg2={setBg2}
+        setBg3={setBg3}
+        setBg4={setBg4}
+      />
       <Car 
         showOrder={showOrder} 
         setShowOrder={setShowOrder}
@@ -88,9 +100,12 @@ export default function Store() {
         setCarList={setCarList}
         filteredList={filteredList}
         searchList={searchList}
+        bg1={bg1}
+        bg2={bg2}
+        bg4={bg4}
       />
       {/* Menu movil */}
-      <nav className={`z-20 bg-[#1F1D2B] blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl`}>
+      <nav className={`z-20 ${bg2} blu lg:hidden fixed w-full bottom-0 left-0 text-3xl text-gray-400 py-2 px-8 flex items-center justify-between rounded-tl-xl rounded-tr-xl`}>
         <button className="p-2">
           <RiUser3Line />
         </button>
@@ -114,11 +129,13 @@ export default function Store() {
               setSelectedCategory={setSelectedCategory}
               setSearchItem={setSearchItem}
               matchingCount={matchingCount}
+              bg2={bg2}
+              bg4={bg4}
             />
             {/* Title content */}
             <div className="flex items-center justify-between mb-1 overflow-y-hidden">
               <h2 className="text-xl text-gray-300">Escoge tus productos</h2>
-              <button className="flex items-center gap-4 text-gray-300 bg-[#1F1D2B] py-2 px-4 rounded-lg">
+              <button className={`flex items-center gap-4 text-gray-300 ${bg2} py-2 px-4 rounded-lg`}>
                 <RiArrowDownSLine /> Dine in
               </button>
             </div>
@@ -146,6 +163,7 @@ export default function Store() {
                     setSelectedImage={setSelectedImage}
                     filteredList={filteredList}
                     searchList={searchList}
+                    bg2={bg2}
                   />
                 ))
               : filteredList.map((item) => (

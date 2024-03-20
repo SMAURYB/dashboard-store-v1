@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
 
 const Card = (props) => {
-  const { id, img, description, price, inventory, setCarList, carList, selected, setShowProductImage, setSelectedImage, searchList, filteredList } = props;
+  const { 
+    id, 
+    img, 
+    description, 
+    price, 
+    inventory, 
+    setCarList, 
+    carList, 
+    selected, 
+    setShowProductImage, 
+    setSelectedImage, 
+    searchList, 
+    filteredList,
+    bg2
+  } = props;
 
   const handleCheckboxChange = () => {
     if (!selected) {
@@ -38,7 +52,7 @@ const Card = (props) => {
   }
 
   return (
-    <div className={`${selected ? 'bg-[#312d49]' : 'bg-[#1F1D2B]' } p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300 shadow-lg`}>
+    <div className={`${selected ? `${bg3}` : `${bg2}` } p-8 rounded-xl flex flex-col items-center gap-2 text-center text-gray-300 shadow-lg`}>
       <button
         onClick={handleShowProductImage}
         className="hover:scale-[102%] duration-75 ease-out  "

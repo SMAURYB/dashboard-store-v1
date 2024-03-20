@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from '../../context/AuthContext';
 
 const Header = (props) => {
-  const { selectedCategory, setSelectedCategory, setSearchItem, matchingCount } = props;
+  const { selectedCategory, setSelectedCategory, setSearchItem, matchingCount, bg2, bg4 } = props;
   const [searchText, setSearchText] = useState(''); // Agregado estado para el texto de búsqueda
   const categoryData = [
     { id: 1, name: 'Bebidas', category: '1' },
@@ -39,7 +39,7 @@ const Header = (props) => {
                 onChange={handleSearch}
                 value={searchText}
                 type="text"
-                className="bg-[#1F1D2B] w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none"
+                className={`${bg2} w-full py-2 pl-10 pr-4 rounded-lg text-gray-300 outline-none`}
                 placeholder="Buscar"
               />
             </div>
@@ -61,7 +61,7 @@ const Header = (props) => {
             {categoryData.map(item => (
               <button
                 key={item.id}
-                className={`py-2 pr-4 ${selectedCategory === item.category ? 'relative before:w-1/2 before:h-[2px] before:absolute before:bg-[#ec7c6a] before:left-0 before:rounded-full before:-bottom-[1px] text-[#ec7c6a]' : ''}`}
+                className={`py-2 pr-4 ${selectedCategory === item.category ? `relative before:w-1/2 before:h-[2px] before:absolute before:${bg4} before:left-0 before:rounded-full before:-bottom-[1px] text-[#ec7c6a]` : ''}`}
                 onClick={() => setSelectedCategory(item.category)}
               >
                 {item.name}

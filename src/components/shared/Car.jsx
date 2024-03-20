@@ -11,6 +11,9 @@ const Car = (props) => {
     setCarList,
     filteredList,
     searchList,
+    bg1,
+    bg2,
+    bg4
   } = props;
 
   const [totalCarrito, setTotalCarrito] = useState(0);
@@ -84,7 +87,7 @@ const Car = (props) => {
 
   return (
     <div
-      className={`lg:col-span-2 fixed top-0 bg-[#1F1D2B] w-full lg:w-96 lg:right-0 h-full transition-all z-50 ${
+      className={`lg:col-span-2 fixed top-0 ${bg2} w-full lg:w-96 lg:right-0 h-full transition-all z-50 ${
         showOrder ? "right-0" : "-right-full"
       }`}
     >
@@ -92,12 +95,12 @@ const Car = (props) => {
       <div className="relative pt-16 lg:pt-8 text-gray-300 p-8 h-full">
         <RiCloseLine
           onClick={() => setShowOrder(false)}
-          className="lg:hidden absolute left-4 top-4 p-3 box-content text-gray-300 bg-[#262837] rounded-full text-xl"
+          className={`lg:hidden absolute left-4 top-4 p-3 box-content text-gray-300 ${bg1} rounded-full text-xl`}
         />
         {/* <h1 className="text-2xl my-4">Orders #151416</h1> */}
         {/* Pills */}
         <div className="flex items-center gap-4 flex-wrap mb-8">
-          <button className="bg-[#ec7c6a] text-white py-2 px-4 rounded-xl">
+          <button className={`${bg4} text-white py-2 px-4 rounded-xl`}>
             Dine In
           </button>
           <button className="text-[#ec7c6a] py-2 px-4 rounded-xl border border-gray-500">
@@ -146,7 +149,7 @@ const Car = (props) => {
           </div>
           <div>
             <button 
-              className="bg-[#ec7c6a] w-full py-2 px-4 rounded-lg"
+              className={`${bg4} w-full py-2 px-4 rounded-lg`}
               onClick={() => navigate("/payment")}
             >
               Continuar con el pago
