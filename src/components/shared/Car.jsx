@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 import CarBasket from "./CarBasket";
 
 const Car = (props) => {
@@ -14,6 +15,7 @@ const Car = (props) => {
 
   const [totalCarrito, setTotalCarrito] = useState(0);
   // const [isSelected, SetIsSelected] = useState(true)
+  const navigate = useNavigate();
 
   const updateTotalCarrito = (cant, producto, index) => {
     let total = 0;
@@ -143,7 +145,10 @@ const Car = (props) => {
             <span>$ {totalCarrito}</span>
           </div>
           <div>
-            <button className="bg-[#ec7c6a] w-full py-2 px-4 rounded-lg">
+            <button 
+              className="bg-[#ec7c6a] w-full py-2 px-4 rounded-lg"
+              onClick={() => navigate("/payment")}
+            >
               Continuar con el pago
             </button>
           </div>

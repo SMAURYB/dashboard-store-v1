@@ -21,7 +21,7 @@ export default function Login() {
     setError("");
     try {
       await login(user.email, user.password);
-      navigate("/dashboard");
+      navigate("/dashboard", { state: { message: 'Bienvenido a su tienda Online' } });
     } catch (error) {
       setError(error.message);
     }

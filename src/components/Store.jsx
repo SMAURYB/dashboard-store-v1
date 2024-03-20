@@ -57,6 +57,8 @@ export default function Store() {
     setMatchingCount(searchList.length);
   }, [searchItem]);
 
+  
+
   // console.log('authContext.user.auth._isInitialized', authContext.user && authContext.user.auth && authContext.user.auth._isInitialized);
   return (
     <>
@@ -77,7 +79,7 @@ export default function Store() {
           </div>
         </div>
       }
-    <div className={`${showProductImage ? 'blur-lg' : 'relative z-20 bg-[#262837] w-full h-screen'}`}>
+    <div className={`${showProductImage ? 'blur-lg opacity-5' : 'relative z-20 bg-[#262837] w-full h-screen'}`}>
       <Sidebar showMenu={showMenu} />
       <Car 
         showOrder={showOrder} 
