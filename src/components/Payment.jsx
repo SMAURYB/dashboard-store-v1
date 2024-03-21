@@ -15,7 +15,7 @@ export default function Payment() {
   };
 
   return (
-    <div className="w-full max-w-xs m-auto text-black bg-[#267698]">
+    <div className="w-full max-w-xs m-auto text-black bg-amber-100">
       <h1>Este es el módulo de pago</h1>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         {/* <p className="text-xl mb-4">welcome {user.displayName || user.email}</p> */}

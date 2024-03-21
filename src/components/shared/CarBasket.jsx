@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const CarBasket = (props) => {
-  const { id, productName, price, image, inventory, deleteItem } = props;
+  const { id, productName, price, image, inventory, deleteItem, bg1 } = props;
   const [cantidad, setCantidad] = useState(1);
 
   const handleCantidadChange = (newCantidad) => {
@@ -26,7 +26,7 @@ const CarBasket = (props) => {
           <img src={image} className="w-16 h-16 object-cover rounded-full" alt={productName} />
           <div className='flex flex-col justify-start items-start'>
             <h2>{productName}</h2>
-            <h3 className="text-gray-500">$ {price}</h3>
+            <h3 className="text-zinc-200">$ {price}</h3>
           </div>
         </div>
         {/* Qty */}

@@ -19,7 +19,7 @@ export default function Register() {
     setError("");
     try {
       await signup(user.email, user.password);
-      navigate("/");
+      navigate("/profile", { state: { message: 'Queremos saber más sobre tí..' } });
     } catch (error) {
       setError(error.message);
     }

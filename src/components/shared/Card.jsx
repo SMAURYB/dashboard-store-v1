@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Card = (props) => {
   const { 
@@ -14,7 +14,8 @@ const Card = (props) => {
     setSelectedImage, 
     searchList, 
     filteredList,
-    bg2
+    bg2,
+    bg3
   } = props;
 
   const handleCheckboxChange = () => {
@@ -66,26 +67,23 @@ const Card = (props) => {
 
       
       <p className="text-[20px] hover:text-[#fff] hover:scale-[101%]">{description}</p>
-      <span className="text-[18px] text-gray-400  hover:text-gray-300 hover:scale-[101%]">${price}</span>
+      <span className="text-[18px] text-gray-200  hover:text-gray-300 hover:scale-[101%]">${price}</span>
       <p className="text-[14px] text-gray-400  hover:text-gray-300 hover:scale-[101%]">{inventory} disponibles</p>
 
 
-      <label className="text-[14px] text-gray-400 hover:text-gray-300 hover:scale-[101%]">
-      <div className="flex items-center">
-        <span className="mr-2">
-          Meter al carrito
-        </span>
-        <input
-          type="checkbox"
-          checked={selected}
-          onChange={handleCheckboxChange}
-          className="transform scale-120 ml-2 appearance-none w-6 h-6 bg-gray-200 border border-gray-400 rounded-md checked:bg-red-400 checked:border-slate-200 checked:border-2 focus:outline-none focus:ring-none"
-        />
-      </div>
-</label>
-
-
-
+      <label className="text-[14px] text-gray-200 hover:text-gray-300 hover:scale-[101%]">
+        <div className="flex items-center">
+          <span className="mr-2">
+            Meter al carrito
+          </span>
+          <input
+            type="checkbox"
+            checked={selected}
+            onChange={handleCheckboxChange}
+            className="transform scale-120 ml-2 appearance-none w-6 h-6 bg-gray-200 border border-gray-400 rounded-md checked:bg-lime-400 checked:border-slate-200 checked:border-2 focus:outline-none focus:ring-none"
+          />
+        </div>
+      </label>
     </div>
   );
 };

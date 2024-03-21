@@ -26,23 +26,30 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center pt-5 pb-2 gap-y-3'>
-      <p className='text-[24px] text-[#c8d2ee]'>{message}     {userName}</p>
+    <div className='flex flex-col items-center justify-center pt-5 pb-2 gap-y-3 mt-28'>
+      <p className='text-[24px] text-[#c8d2ee]'>{message}</p>
+      <p className='text-[24px] text-[#8599cf]'>{userName}</p>
       <img src={mercado} className='w-[500px] opacity-80'/>
       <div className='flex flex-row gap-16'>
         <button 
           onClick={handleExitClick}
-          className='text-[16px] text-[#c8d2ee] hover:text-white hover:scale-[105%]'
+          className='text-[20px] text-[#c8d2ee] hover:text-white hover:scale-[105%]'
         >
-          SALIR
+          ¿Quieres salir?
         </button>
         <button 
           onClick={handleContinueClick}
-          className='text-[16px] text-[#c8d2ee] hover:text-white hover:scale-[105%]'
+          className='text-[20px] text-[#c8d2ee] hover:text-white hover:scale-[105%]'
         >
-          CONTINUAR
+          ¿Deseas continuar?
         </button>
       </div>
+      <button 
+          onClick={() => {navigate(-1)}}
+          className='text-[20px] text-[#c8d2ee] hover:text-white hover:scale-[105%]'
+        >
+          Regresar a formulario de perfil
+        </button>
     </div>
   );
 }

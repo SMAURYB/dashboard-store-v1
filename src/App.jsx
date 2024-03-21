@@ -27,7 +27,7 @@ function App() {
   }
 
   return (
-    <div className={`${bg1} h-screen flex items-center justify-center text-[white]`}>
+    <div className={`${bg1} h-screen flex items-start justify-center text-[white]`}>
       <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -51,13 +51,14 @@ export default App;
 // - xxxxxxxxxxxxxxxxxxxxxxxxx localstore para usuario
 // - xxxxxxxxxxxxxxxxxxxxxxxxx habilitar ruta módulo pago  
 // - xxxxxxxxxxxxxxxxxxxxxxxxx habilitar boton cerrar seccion que envie a pagina de salida
-// - xxxxxxxxxxxxxxxxxxxxxxxxxcolocar nombre de usuario en parte superior derecha
+// - xxxxxxxxxxxxxxxxxxxxxxxxx colocar nombre de usuario en parte superior derecha
+// - xxxxxxxxxxxxxxxxxxxxxxxxx crear opciones de cambio de tema y colores en la tuerca de settings 
 
 // - después de registrarse navegue al módulo de crear perfil y quede la opción de saltarse ese paso y que lo haga cuando le de al boton pagar 
-// - crear opciones de cambio de tema y colores en la tuerca de settings 
 // - setear firebase para registro de usuarios con perfil (direccion, telefono, etc)
 // - módulo de administradores : cargue de productos , productos, etc
 // - poner a funcionar autenticación con google
-// - si me devuelvo de payment, que no se borre el carrito de compras
+// - bug si me devuelvo de payment, que no se borre el carrito de compras
+// - bug corregir en carrito, si se selecciona un item, y se cambia de tab, se borra el check
 
 

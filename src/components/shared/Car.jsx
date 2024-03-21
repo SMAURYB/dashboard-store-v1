@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CarBasket from "./CarBasket";
 
 const Car = (props) => {
@@ -17,7 +17,6 @@ const Car = (props) => {
   } = props;
 
   const [totalCarrito, setTotalCarrito] = useState(0);
-  // const [isSelected, SetIsSelected] = useState(true)
   const navigate = useNavigate();
 
   const updateTotalCarrito = (cant, producto, index) => {
@@ -78,8 +77,6 @@ const Car = (props) => {
     // // unSelectCheckbox(index);
   };
 
-
-
   // Efecto para actualizar el total cada vez que renderice
   useEffect(() => {
     updateTotalCarrito();
@@ -99,7 +96,7 @@ const Car = (props) => {
         />
         {/* <h1 className="text-2xl my-4">Orders #151416</h1> */}
         {/* Pills */}
-        <div className="flex items-center gap-4 flex-wrap mb-8">
+        {/* <div className="flex items-center gap-4 flex-wrap mb-8">
           <button className={`${bg4} text-white py-2 px-4 rounded-xl`}>
             Dine In
           </button>
@@ -109,7 +106,7 @@ const Car = (props) => {
           <button className="text-[#ec7c6a] py-2 px-4 rounded-xl border border-gray-500">
             Delivery
           </button>
-        </div>
+        </div> */}
         {/* Car */}
         <div>
           <div className="grid grid-cols-6 mb-4 p-4">
@@ -118,10 +115,10 @@ const Car = (props) => {
             <h5>{carList?.price}</h5>
           </div>
           {/* Products */}
-          <div className="h-[420px] md:h-[700px] lg:h-[540px] overflow-scroll ">
+          <div className="h-[420px] md:h-[700px] lg:h-[540px] overflow-scroll custom-scroll">
           {carList.map((item, index) => (
             <CarBasket 
-              // key={item.id}
+              key={item.id}  // Asegúrate de agregar esta línea
               id={item.id}
               productName={item.description}
               price={item.price}
@@ -132,16 +129,17 @@ const Car = (props) => {
               index={index} // Pasa el índice al componente CarBasket
               setCarList={setCarList}
               deleteItem={() => deleteItem(item.id)}  // Agrega esta línea
+              bg1={bg1}
               // deleteItemFromCar={() => deleteItemFromCar(index)}
             />
           ))}
-          </div>
+        </div>
         </div>
         {/* Submit payment */}
-        <div className="bg-[#262837] absolute w-full bottom-0 left-0 p-4">
+        <div className={`${bg1} absolute w-full bottom-0 left-0 p-4`}>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-gray-400">Descuento</span>
-            <span>$0</span>
+            <span className="text-gray-400">Productos seleccionados: </span>
+            <span>10</span>
           </div>
           <div className="flex items-center justify-between mb-6">
             <span className="text-gray-400">Subtotal</span>
@@ -149,7 +147,7 @@ const Car = (props) => {
           </div>
           <div>
             <button 
-              className={`${bg4} w-full py-2 px-4 rounded-lg`}
+              className={`${bg4} w-full py-2 px-4 rounded-lg text-[#fefff9]`}
               onClick={() => navigate("/payment")}
             >
               Continuar con el pago

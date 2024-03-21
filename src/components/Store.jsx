@@ -59,9 +59,6 @@ export default function Store() {
     setMatchingCount(searchList.length);
   }, [searchItem]);
 
-  console.log('bg1,bg2,bg3,bg4',bg1,bg2,bg3,bg4)
-
-  // console.log('authContext.user.auth._isInitialized', authContext.user && authContext.user.auth && authContext.user.auth._isInitialized);
   return (
     <>
     {showProductImage && 
@@ -81,7 +78,7 @@ export default function Store() {
           </div>
         </div>
       }
-    <div className={`${showProductImage ? 'blur-lg opacity-5' : `relative z-20 ${bg1} w-full h-screen`}`}>
+    <div className={`${showProductImage ? 'blur-lg opacity-5' : `relative z-20 ${bg1} w-full`}`}>
       <Sidebar 
         showMenu={showMenu} 
         bg1={bg1}
@@ -102,6 +99,7 @@ export default function Store() {
         searchList={searchList}
         bg1={bg1}
         bg2={bg2}
+        bg3={bg3}
         bg4={bg4}
       />
       {/* Menu movil */}
@@ -133,12 +131,12 @@ export default function Store() {
               bg4={bg4}
             />
             {/* Title content */}
-            <div className="flex items-center justify-between mb-1 overflow-y-hidden">
+            {/* <div className="flex items-center justify-between mb-1 overflow-y-hidden">
               <h2 className="text-xl text-gray-300">Escoge tus productos</h2>
               <button className={`flex items-center gap-4 text-gray-300 ${bg2} py-2 px-4 rounded-lg`}>
                 <RiArrowDownSLine /> Dine in
               </button>
-            </div>
+            </div> */}
           </div>
           
           {/* Content */}
@@ -163,6 +161,7 @@ export default function Store() {
                     setSelectedImage={setSelectedImage}
                     filteredList={filteredList}
                     searchList={searchList}
+                    bg3={bg3}
                     bg2={bg2}
                   />
                 ))
@@ -182,6 +181,8 @@ export default function Store() {
                     setSelectedImage={setSelectedImage}
                     filteredList={filteredList}
                     searchList={searchList}
+                    bg3={bg3}
+                    bg2={bg2}
                   />
                 ))
           }
