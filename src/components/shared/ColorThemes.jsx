@@ -17,8 +17,8 @@ export default function ColorThemes({ setBg1, setBg2, setBg3, setBg4, bg2 }) {
   }
 
   const Theme3 = () => {
-    setBg1('bg-[#6e454b]');
-    setBg2('bg-[#422a2e]');
+    setBg1('bg-[#ef8797]');
+    setBg2('bg-[#900f25]');
     setBg3('bg-[#8f376c]');
     setBg4('bg-[#e44fab]');
   }
