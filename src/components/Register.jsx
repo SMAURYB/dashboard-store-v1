@@ -8,22 +8,32 @@ export default function Register() {
 
   const [user, setUser] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const userHandler = (e) => {
+    const { name, value } = e.target;
+    setUser((prevState) => ({ ...prevState, [name]: value }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
+      // Llamada a la función signup del contexto de autenticación
       await signup(user.email, user.password);
-      navigate("/profile", { state: { message: 'Queremos saber más sobre tí..' } });
+      // Redireccionar a la página de perfil con un mensaje
+      navigate("/profile", { state: { message: '¡Bienvenido! Complete su perfil para continuar.', user } });
+
     } catch (error) {
       setError(error.message);
     }
   };
+
+  console.log("user",user)
 
   return (
     <div className="w-full max-w-xs m-auto text-black">
@@ -38,13 +48,15 @@ export default function Register() {
             htmlFor="email"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
-            Email
+            Correo electrónico
           </label>
           <input
             type="email"
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            name="email"
+            value={user.email}
+            onChange={userHandler}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="tucorreo@correo.com"
+            placeholder="Ingrese su correo electrónico"
           />
         </div>
 
@@ -57,20 +69,22 @@ export default function Register() {
           </label>
           <input
             type="password"
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            name="password"
+            value={user.password}
+            onChange={userHandler}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="******"
+            placeholder="Ingrese su contraseña"
           />
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Regístrese
+          Registrarse
         </button>
       </form>
-      <p className="my-4 text-sm flex justify-between px-3 text-[#dee1e3]">
-        Ya tienes una cuenta?
+      <p className="my-4 text-sm flex justify-between px-3 text-gray-700">
+        ¿Ya tienes una cuenta?
         <Link to="/login" className="text-blue-700 hover:text-blue-900">
-          Ingrese
+          Inicie sesión aquí
         </Link>
       </p>
     </div>

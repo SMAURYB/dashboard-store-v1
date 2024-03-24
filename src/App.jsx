@@ -55,13 +55,16 @@ export default App;
 // - xxxxxxxxxxxxxxxxxxxxxxxxx crear opciones de cambio de tema y colores en la tuerca de settings 
 // - xxxxxxxxxxxxxxxxxxxxxxxxx después de registrarse navegue al módulo de crear perfil y quede la opción de saltarse ese 
 // - xxxxxxxxxxxxxxxxxxxxxxxxx paso y que lo haga cuando le de al boton pagar 
+// - xxxxxxxxxxxxxxxxxxxxxxxxx mejorar el scroll del car con custom-scroll
+// - xxxxxxxxxxxxxxxxxxxxxxxxx poner a funcionar autenticación con google
 
 // - setear firebase para registro de usuarios con perfil (direccion, telefono, etc)
+// - ya hace el envio de los datos de los usuarios a firebase.cloud... hay que buscar que se relaciones por id de usuario
 // - módulo de administradores : cargue de productos , productos, etc
-// - poner a funcionar autenticación con google
-// - mejorar el scroll del car con custom-scroll
-// - arreglar el hover del sidebar
+// - crear módulo de pagos... hay que buscar opcion que cobre menos..recomedadas payu y mercadopago en versión test
+// - arreglar el hover del sidebar o hacer uno mas bacano
 // - bug si me devuelvo de payment, que no se borre el carrito de compras
 // - bug corregir en carrito, si se selecciona un item, y se cambia de tab, se borra el check
+// - usar Zubstan para variables globales como carrito de compras
 
 

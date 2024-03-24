@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { RiCloseLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import CarBasket from "./CarBasket";
+import '../../App.css';
 
 const Car = (props) => {
   const { 

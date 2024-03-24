@@ -31,6 +31,7 @@ export default function Login() {
     setUser({ ...user, [name]: value });
 
   const handleGoogleSignin = async () => {
+    console.log('entré a handleGoogleSignin')
     try {
       await loginWithGoogle();
       navigate("/");
