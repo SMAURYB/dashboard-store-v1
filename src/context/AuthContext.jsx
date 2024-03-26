@@ -26,6 +26,7 @@ export const useAuth = () => {
 // Componente que provee el contexto de autenticación a la aplicación
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // Estado para almacenar el usuario autenticado
+  const [uid, setUid] = useState(null)
   const [loading, setLoading] = useState(true); // Estado para indicar si se está cargando la autenticación
 
   // Función para guardar el usuario en el almacenamiento local
@@ -50,7 +51,9 @@ const signup = async (email, password) => {
     // await setDoc(userDocRef, { email, username });
     
     // Actualizar el estado local del usuario
-    setUser(userCredential.user);
+    setUser(userCredential?.user);
+    setUid(userCredential?.user?.uid)
+    console.log("uid in authcontext", user?.uid)
     saveUserToLocalStorage(userCredential.user);
 
     // Notificar al usuario que se ha registrado correctamente
@@ -131,12 +134,14 @@ const signup = async (email, password) => {
   }, []);
 
   // Se provee el contexto de autenticación a los componentes hijos
+  console.log("uid", uid)
   return (
     <authContext.Provider
       value={{
         signup,
         login,
         user,
+        uid,
         logout,
         loading,
         loginWithGoogle,

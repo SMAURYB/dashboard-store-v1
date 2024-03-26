@@ -2,17 +2,19 @@ import React from "react";
 import { useForm } from "react-hook-form"; 
 import { useNavigate, useLocation } from 'react-router-dom';
 import { GrFormClose } from 'react-icons/gr';
+import { useAuth } from "../context/AuthContext";
 import { db } from "../firebase.config"; 
 import { doc, setDoc } from "firebase/firestore";
-import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
+// import { ref, listAll, getDownloadURL, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
 const Profile = () => {
+  const { uid } = useAuth();
   const location = useLocation();
   const message = location.state?.message;
   const userPassword = location.state?.user?.password;
   const userEmail = location.state?.user?.email;
-
+  // const userUid = location.state?.user?.uid;
   // Configurar el formulario react-hook-form
   const { register, handleSubmit } = useForm();
   // Obtener la función de navegación
@@ -20,22 +22,23 @@ const Profile = () => {
 
   // Función que se ejecuta cuando se envía el formulario
   const onSubmit = async (data) => {
-    console.log("entro a onsubmit")
     try {
       console.log("Datos del formulario:", data);
         console.log(data.username)
         console.log(data.address)
         console.log(data.phone)
         console.log(data.email)
+        console.log(uid)
       const docRef = doc(db, "usuarios", v4()); 
       await setDoc(docRef, {
         nombre: data.username,
         direccion: data.address,
         correo: data.email,
         password: data.password,
-        telefono: data.phone
+        telefono: data.phone,
+        uid: uid
       });
-
+      console.log("uid en profile",uid)
       console.log("Documento añadido con ID: ", docRef.id);
 
       // Redireccionar al usuario a la página de inicio de sesión o a otra página relevante

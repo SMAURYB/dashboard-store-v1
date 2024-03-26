@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { Alert } from "./Alert";
 
 export default function Register() {
-  const { signup } = useAuth();
+  const { signup, uid } = useAuth();
 
   const [user, setUser] = useState({
     email: "",
@@ -26,14 +26,14 @@ export default function Register() {
       // Llamada a la función signup del contexto de autenticación
       await signup(user.email, user.password);
       // Redireccionar a la página de perfil con un mensaje
-      navigate("/profile", { state: { message: '¡Bienvenido! Complete su perfil para continuar.', user } });
+      navigate("/profile", { state: { message: '¡Bienvenido! Complete su perfil para continuar.', user, uid } });
 
     } catch (error) {
       setError(error.message);
     }
   };
 
-  console.log("user",user)
+  console.log("uid",uid)
 
   return (
     <div className="w-full max-w-xs m-auto text-black">
