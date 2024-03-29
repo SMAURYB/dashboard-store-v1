@@ -5,7 +5,7 @@ import {
   RiUserLine,
   RiPieChartLine,
   RiMailLine,
-  RiNotification3Line,
+  RiAdminLine,
   RiSettings4Line,
   RiLogoutCircleRLine,
 } from 'react-icons/ri';
@@ -84,12 +84,12 @@ const Sidebar = (props) => {
             </a>
           </li>
           <li className={`hover:${bg1} p-4 rounded-tl-xl rounded-bl-xl group transition-colors`}>
-            <a
-              href="#"
+            <button
+              onClick={() => navigate("/admin")}
               className={`group-hover:${bg4} p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors`}
             >
-              <RiNotification3Line className="text-2xl" />
-            </a>
+              <RiAdminLine className="text-2xl" />
+            </button>
           </li>
           <li className={`relative hover:${bg1} p-4 rounded-tl-xl rounded-bl-xl group transition-colors`}>
             {/* Botón para navegar a /dashboard */}

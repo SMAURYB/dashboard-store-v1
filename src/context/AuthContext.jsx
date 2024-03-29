@@ -134,7 +134,8 @@ const signup = async (email, password) => {
   }, []);
 
   // Se provee el contexto de autenticación a los componentes hijos
-  console.log("uid", uid)
+  console.log("user del AuthContext", user)
+  
   return (
     <authContext.Provider
       value={{
