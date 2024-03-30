@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useAuth } from '../../context/AuthContext';
 
 const Header = (props) => {
-  const { selectedCategory, setSelectedCategory, setSearchItem, matchingCount, bg2, bg4 } = props;
+  const { selectedCategory, setSelectedCategory, setSearchItem, matchingCount, bg2, bg4, name } = props;
   const [searchText, setSearchText] = useState(''); // Agregado estado para el texto de búsqueda
   const categoryData = [
     { id: 1, name: 'Bebidas', category: '1' },
@@ -20,8 +20,6 @@ const Header = (props) => {
     setSearchText(inputValue); // Actualiza el estado del texto de búsqueda
     // Puedes realizar más acciones con el valor del input si es necesario
   };
-
-  const userName = authContext?.user?.email;
 
   return (
     <header>
@@ -44,8 +42,8 @@ const Header = (props) => {
               />
             </div>
           </form>
-          <div>
-            <p>{userName}</p>
+          <div className='w-full h-7 mt-2 font-sans tracking-widest text-gray-300'>
+            <p>{name}</p>
           </div>
         </div>
       </div>

@@ -2,8 +2,10 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext";
 import mercado from '../assets/mercado.png';
+import useThemes from '../hooks/useThemes';
 
 export default function Dashboard() {
+  const { bg1, bg2, bg3, bg4, setBg1, setBg2, setBg3, setBg4 } = useThemes();
   const authContext = useAuth();
   const location = useLocation();
   const message = location.state?.message;
@@ -26,7 +28,8 @@ export default function Dashboard() {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center pt-5 pb-2 gap-y-3 mt-28'>
+    <div className={`${bg2} flex flex-row items-center justify-center w-full h-full`}>
+      <div className={`flex flex-col items-center justify-center ${bg2} pt-5 pb-2 gap-y-3`}>
       <p className='text-[24px] text-[#c8d2ee]'>{message}</p>
       <p className='text-[24px] text-[#8599cf]'>{userName}</p>
       <img src={mercado} className='w-[500px] opacity-80'/>
@@ -51,5 +54,8 @@ export default function Dashboard() {
           Regresar a formulario de perfil
         </button>
     </div>
+
+    </div>
+    
   );
 }

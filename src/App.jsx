@@ -29,7 +29,7 @@ function App() {
   }
 
   return (
-    <div className={`${bg1} h-screen flex items-start justify-center text-[white]`}>
+    <div className={`h-screen flex items-start justify-center`}>
       <BrowserRouter>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -51,7 +51,7 @@ function App() {
 
 export default App;
 
-// - 1) tomar el userCredentials y volverlo variable global, que aparezca el nombre del usuario arriba en el store
+// - 1) xxxxxxxxxxxxxxxxxtomar el userCredentials y volverlo variable global, que aparezca el nombre del usuario arriba en el store
 // - 2) mejorar los mensajes de error del login y register, en español y colocarle adapters
 // - 3) módulo de administradores : cargue de productos , productos, etc
 //      - Formulario de cargue de productos uno a uno, con: 

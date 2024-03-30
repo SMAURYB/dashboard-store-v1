@@ -21,7 +21,8 @@ const Sidebar = (props) => {
     setBg1,
     setBg2,
     setBg3,
-    setBg4
+    setBg4,
+    name
   } = props;
   const [showColorOptions, setShowColorOptions] = useState(false);
   const navigate = useNavigate();
@@ -84,12 +85,12 @@ const Sidebar = (props) => {
             </a>
           </li>
           <li className={`hover:${bg1} p-4 rounded-tl-xl rounded-bl-xl group transition-colors`}>
-            <button
-              onClick={() => navigate("/admin")}
-              className={`group-hover:${bg4} p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors`}
-            >
-              <RiAdminLine className="text-2xl" />
-            </button>
+              <button
+                  onClick={() => navigate("/admin", { state:{ name: name }})}
+                  className={`group-hover:${bg4} p-4 flex justify-center rounded-xl text-[#ec7c6a] group-hover:text-white transition-colors`}
+              >
+                  <RiAdminLine className="text-2xl" />
+              </button>
           </li>
           <li className={`relative hover:${bg1} p-4 rounded-tl-xl rounded-bl-xl group transition-colors`}>
             {/* Botón para navegar a /dashboard */}

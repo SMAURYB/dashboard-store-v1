@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import useThemes from '../../hooks/useThemes';
 import { useAuth } from "../../context/AuthContext";
-//import { useHistory } from 'react-router-dom'; // Assuming you're using React Router
 import { RiDeleteBin6Line, RiEdit2Line } from "react-icons/ri";
 import AdminForm from './AdminForm'; // Capitalized component name
 import useDataBase from '../../hooks/useDataBase';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../../App.css';
 
 export default function Admin() {
   const [showForm, setShowForm] = useState(false);
   const { user } = useAuth();
+  const location = useLocation();
   const { dataBase } = useDataBase();
+  const name2 = location.state?.name;
   const { bg1, bg2, bg3, bg4, setBg1, setBg2, setBg3, setBg4 } = useThemes();
- // const history = useHistory(); // For navigation
-
+  const navigate = useNavigate();
   // Function to handle item deletion
   const handleDeleteButton = (itemId) => {
     // Implement deletion logic here
@@ -24,20 +25,25 @@ export default function Admin() {
     setShowForm(true)
   };
 
+  console.log("name2", name2)
+
   return (
-    <div className={`${bg2}`}>
+    <div className={`flex flex-col items-center justify-start ${bg2} w-full h-full gap-y-2 px-20`}>
       {showForm && 
         <AdminForm 
           className='z-40'
           setShowForm={setShowForm}
         />
-      } {/* Capitalized component name */}
+      } 
       {!showForm && 
-      <div className={`flex flex-col items-center justify-start mt-[20px] ${bg1} w-[1500px] h-[840px] rounded-2xl shadow-md gap-y-2 py-4`}>
-        <p className="text-[40px] font-bold text-red-600">
-          MÓDULO DE ADMINISTRADORES
-        </p>
-        <div className="overflow-y-scroll w-[94%] rounded-lg">
+      <div className={`flex flex-col items-center justify-start w-full h-full pb-2 gap-y-5`}>
+        <div className='flex flex-row justify-between items-center w-full px-16'>
+          <p className="text-[25px] font-semibold text-slate-300 tracking-wider mt-3">
+            MÓDULO DE ADMINISTRADORES
+          </p>
+          <p className='text-[25px] text-slate-300'>{name2}</p>
+        </div>
+        <div className="overflow-y-scroll w-[94%] h-[90%] rounded-lg ">
           <table className="text-black w-full bg-zinc-400">
             <thead className="h-[46px] bg-zinc-500 sticky top-0 z-10">
               <tr>
@@ -66,10 +72,10 @@ export default function Admin() {
                   <td className="border border-slate-200 text-center">{item.availability}</td>
                   <td className="border border-slate-200 text-center">{item.category}</td>
                   <td className=" h-[46px] gap-x-3 flex flex-row items-center justify-center ">
-                    <button className="flex flex-row items-center justify-center w-8 h-[38px] rounded-md bg-red-600 text-white" onClick={() => handleDeleteButton(item.id)}>
+                    <button className="flex flex-row items-center justify-center w-8 h-8 rounded-md bg-red-600 text-white" onClick={() => handleDeleteButton(item.id)}>
                       <RiDeleteBin6Line />
                     </button>
-                    <button className="flex flex-row items-center justify-center w-8 h-[38px] rounded-md bg-slate-700 text-white" onClick={() => handleEditButton(item.id)}>
+                    <button className="flex flex-row items-center justify-center w-8 h-8 rounded-md bg-slate-700 text-white" onClick={() => handleEditButton(item.id)}>
                       <RiEdit2Line />
                     </button>
                   </td>
@@ -80,8 +86,8 @@ export default function Admin() {
         </div>
 
         <button
-          className="bg-purple-900 hover:bg-slate-300 rounded py-2 px-4 text-white font-bold"
-          // onClick={() => history.goBack()} 
+          className="bg-purple-900 hover:bg-slate-300 hover:text-purple-900 rounded text-xl py-2 px-6 mb-3 text-slate-300 font-bold"
+          onClick={() => navigate(-1)} 
         >
           Regresar
         </button>

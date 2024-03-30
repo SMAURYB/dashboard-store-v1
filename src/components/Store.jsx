@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuth } from '../context/AuthContext';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   RiMenu3Fill,
   RiUser3Line,
@@ -20,7 +20,7 @@ import useThemes from '../hooks/useThemes';
 export default function Store() {
 
   const authContext = useAuth()
-  
+  const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState('1');
   const [showMenu, setShowMenu] = useState(false);
   const [showOrder, setShowOrder] = useState(false);
@@ -34,7 +34,9 @@ export default function Store() {
 
   const { dataBase } = useDataBase();
   const { bg1, bg2, bg3, bg4, setBg1, setBg2, setBg3, setBg4 } = useThemes();
-  const userName = authContext?.user?.email;
+  // const userName = authContext?.user?.email;
+  const name = location.state?.userName;
+  const message = location.state?.message;
 
   useEffect(() => {
     const filteredData = dataBase.filter(item => item.category === selectedCategory);
@@ -59,10 +61,12 @@ export default function Store() {
     setMatchingCount(searchList.length);
   }, [searchItem]);
 
+  console.log("name", name)
+
   return (
     <>
     {showProductImage && 
-        <div className="z-40 flex items-center justify-center absolute w-full">
+        <div className="z-40 flex items-center justify-center absolute w-full bg-[#2e2]">
           <div className="relative">
             <button
               onClick={() => setShowProductImage(false)}
@@ -89,6 +93,7 @@ export default function Store() {
         setBg2={setBg2}
         setBg3={setBg3}
         setBg4={setBg4}
+        name={name}
       />
       <Car 
         showOrder={showOrder} 
@@ -129,6 +134,7 @@ export default function Store() {
               matchingCount={matchingCount}
               bg2={bg2}
               bg4={bg4}
+              name={name}
             />
             {/* Title content */}
             {/* <div className="flex items-center justify-between mb-1 overflow-y-hidden">

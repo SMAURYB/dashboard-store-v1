@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { Alert } from "./Alert";
+import useThemes from '../hooks/useThemes';
 
 export default function Register() {
   const { signup, uid } = useAuth();
-
+  const { bg1, bg2, bg3, bg4, setBg1, setBg2, setBg3, setBg4 } = useThemes();
   const [user, setUser] = useState({
     email: "",
     password: ""
@@ -33,60 +34,60 @@ export default function Register() {
     }
   };
 
-  console.log("uid",uid)
-
   return (
-    <div className="w-full max-w-xs m-auto text-black">
-      {error && <Alert message={error} />}
+    <div className={`${bg2} flex flex-row items-center justify-center w-full h-full`}>
+      <div className="w-full max-w-xs m-auto text-black">
+        {error && <Alert message={error} />}
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-6 mb-4"
-      >
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Correo electrónico
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={user.email}
-            onChange={userHandler}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Ingrese su correo electrónico"
-          />
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-stone-300 shadow-md rounded px-8 pt-6 pb-6 mb-4"
+        >
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Correo electrónico
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={user.email}
+              onChange={userHandler}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Ingrese su correo electrónico"
+            />
+          </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Contraseña
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={user.password}
-            onChange={userHandler}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Ingrese su contraseña"
-          />
-        </div>
+          <div className="mb-4">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Contraseña
+            </label>
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              onChange={userHandler}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Ingrese su contraseña"
+            />
+          </div>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Registrarse
-        </button>
-      </form>
-      <p className="my-4 text-sm flex justify-between px-3 text-gray-700">
-        ¿Ya tienes una cuenta?
-        <Link to="/login" className="text-blue-700 hover:text-blue-900">
-          Inicie sesión aquí
-        </Link>
-      </p>
+          <button className="bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Registrarse
+          </button>
+        </form>
+        <p className="my-4 text-sm flex justify-between px-3 text-gray-400">
+          ¿Ya tienes una cuenta?
+          <Link to="/login" className="text-blue-500 hover:text-blue-900">
+            Inicie sesión aquí
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
