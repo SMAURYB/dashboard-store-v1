@@ -13,14 +13,14 @@ const firebaseConfig = {
   appId: "1:229679312767:web:078a412f8b1470b784344a"
 };
 
-// Se inicializa la aplicación de Firebase con la configuración proporcionada
+// Initialize Firebase app
 export const app = initializeApp(firebaseConfig);
 
-// Se obtiene una instancia de Firestore utilizando la aplicación de Firebase
+// Get Firestore instance
 export const db = getFirestore(app);
-export const firestore = getFirestore(app)
 
-// Se obtiene una instancia del servicio de autenticación de Firebase utilizando la aplicación de Firebase
+// Get Auth instance
 export const auth = getAuth(app);
 
+// Get Storage instance
 export const storage = getStorage(app);
